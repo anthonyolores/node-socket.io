@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>Socket.io</title>
+   </head>
+   <script src = "/socket.io/socket.io.js"></script>
+   
+   <script>
+      var socket = io();
+      //var socket = io('/my-namespace'); //using namespace
+      socket.on('fakeEvent', function(data){document.write(data.description)});
+      socket.emit('clientEvent', 'Hello im a client ');
+
+      socket.on('newclientconnect',function(data) {
+         document.body.innerHTML = '';
+         document.write("</br>");
+         document.write(data.description);
+      });
+
+    //   socket.on('joinRoom',function(data) {
+    //      document.body.innerHTML = '';
+    //      document.write(data);
+    //   });
+
+    socket.on('connect_failed', function() {
+        document.write("Connection has been failed!");
+    });
+   </script>
+</html>
